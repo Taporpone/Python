@@ -1,0 +1,31 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>PasteProject</title>
+        <link rel="StyleSheet" href="{% static "css/master.css" %}" type="text/css" />
+    </head>
+
+    <body>
+      <div class="links_container">
+        <ul class="master_links">
+          {% if user.is_authenticated %}
+            <li class="navbar"><a href="/paste">New Paste</a></li>
+            <li class="navbar"><a href="/paste/mypastas/">My Pastas</a></li>
+            <li class="navbar"><a href="/paste/about/">About</a></li>
+            <li class = "navbar right_links"><a href="/paste/profile" class="user_profile"><strong>{{user.username}}</strong></a></li>
+            <li class = "navbar right_links"><a href="{% url 'auth_logout' %}?next=/paste/">Log Out</a></li>
+          {% else %}
+            <li class="navbar"><a href="/paste">New Paste</a></li>
+            <li class="navbar"><a href="/paste/about/">About</a></li>
+            <li class = "navbar right_links"><a href="{% url 'auth_login' %}">Log In</a></li>
+            <li class = "navbar right_links"><a href="{% url 'registration_register' %}">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="content">
+        {% block content %} {% endblock %}
+      </div>
+    </body>
+
+</html>

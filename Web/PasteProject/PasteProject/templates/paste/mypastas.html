@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends 'paste/master.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<strong>Hello {{ boldmessage }}!</strong><br />
+<p>
+  Here are pastas you have submitted:
+</p>
+<img src="{% static "images/test.jpeg" %}" />
+{% endblock %}

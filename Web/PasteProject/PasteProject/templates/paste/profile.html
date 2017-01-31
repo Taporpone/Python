@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends 'paste/master.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<strong>Hello {{ user.username }}!</strong><br />
+<ul>
+  <li><a href="{% url 'auth_password_change' %}">Change password</a></li>
+</ul>
+<img src="{% static "images/test.jpeg" %}" />
+{% endblock %}

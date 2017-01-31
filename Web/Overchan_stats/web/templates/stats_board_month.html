@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Stats for {{board}} on {{month}}</title>
+</head>
+<body>
+  {% extends "master_stats.html" %}
+  {% block label %}Board stats for <b>{{board.replace("_",".")}}</b> on <b>{{month.capitalize()}}</b>{% endblock %}
+  {% block months %}
+  <table>
+  <tr>
+    {% for item in months %}
+    <td>
+      <a href="{{ url_for('stats_board_month',year=item[-4:],month=item.split(" ")[0],board=board)}}">{{item.capitalize()}}</a>
+    </td>
+    {% endfor %}
+  </tr>
+  </table>
+  {% endblock %}
+  {% block body %}
+  Total: <b>{{total}}</b>
+  <br />
+  Origin:
+  {% for key,value in origin %}
+  <br />
+  <b>{{key}}:</b> {{value}}
+  {% endfor %}
+
+  Sages: {{sages}}
+  <br />
+
+  Subject field not empty nor saged: {{subjects}}
+  <br />
+
+  Name field not empty: {{names}}
+  <br />
+
+  Posted at:
+  {% for key,value in timez %}
+
+  {% if value %}
+  <br />
+  Hour: <b>{{key}}</b> Posts: <b>{{value}}</b>
+  {% endif %}
+
+  {% endfor %}
+  <br />
+
+  Posted on:
+  {% for key,value in datez %}
+
+  {% if value %}
+  <br />
+  Day: <b>{{key}}</b> Posts: <b>{{value}}</b>
+  {% endif %}
+
+  {% endfor %}
+  <br />
+
+  Nodes:
+  {% for key,value in nodes %}
+  <br />
+  {{key}}: <b>{{value}}</b>
+  {% endfor %}
+
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,251 @@
+<ScreenManagement>:
+    WelcomeScreen:
+    MainScreen:
+    BuisnessCard:
+    Note:
+    NoteCode:
+    CardCode:
+    Load:
+    LoadButton:
+
+<WelcomeScreen>:
+    name: "Welcome"
+    #Image:
+    #    id: background
+    #    source:'static/images/background.png'
+    #    allow_stretch: True
+    #    keep_ratio: False
+    FloatLayout:
+        Button:
+            id: new
+            size_hint:0.35,0.12
+            #source:'static/images/newQR.png'
+            #allow_stretch: True
+            #keep_ratio: False
+            text: "New"
+            pos_hint:{"center_x":0.5,"y":0.6}
+            on_release: app.root.current = "Main"
+        Button:
+            id: load
+            size_hint:0.35,0.12
+            #source:'static/images/newQR.png'
+            #allow_stretch: True
+            #keep_ratio: False
+            text: "Load"
+            pos_hint:{"center_x":0.5,"y":0.45}
+            on_release: app.root.current = "Load"
+
+        Button:
+            id: exit
+            # source:'static/images/quit.png'
+            # allow_stretch: True
+            # keep_ratio: False
+            text: "Quit"
+            size_hint:0.35,0.12
+            pos_hint:{"center_x":0.5,"y":0.2}
+            on_release:root.exit()
+<Load>:
+    name:"Load"
+    GridLayout:
+        rows:3
+        cols:1
+        Label:
+            text:"Choose previously saved QR"
+            size_hint:1,0.125
+        StackLayout:
+            id:stack
+            orientation:"lr-tb"
+        FloatLayout:
+            Button:
+                text:"Back"
+                size_hint:0.333,0.125
+                pos_hint:{"x":0,"bottom_y":1}
+                on_release: app.root.current = "Welcome"
+            Button:
+                text:"Refresh"
+                size_hint:0.333,0.125
+                pos_hint:{"x":0.333,"bottom_y":1}
+                on_release: root.du()
+            Button:
+                text:"New"
+                size_hint:0.333,0.125
+                pos_hint:{"x":0.666,"bottom_y":1}
+                on_release: app.root.current = "Main"
+<LoadButton>:
+    name:"LoadButton"
+    GridLayout:
+        cols:1
+        rows:2
+        Image:
+            id:image
+            allow_stretch:False
+        Button:
+            size_hint_y:0.1
+            text:"Back"
+            on_release: app.root.current = "Load"
+
+<MainScreen>:
+    name:"Main"
+    #Image:
+    #    id: background
+    #    source:'static/images/background.png'
+    #    allow_stretch: True
+    #    keep_ratio: False
+    FloatLayout:
+        Button:
+            id: buisness_card
+            # source:'static/images/contact.png'
+            # allow_stretch: True
+            # keep_ratio: False
+            text:"Card"
+            size_hint:0.35,0.12
+            pos_hint:{"center_x":0.5,"y":0.6}
+            on_release: app.root.current = "BuisnessCard"
+        Button:
+            id: note
+            # source:'static/images/note.png'
+            # allow_stretch: True
+            # keep_ratio: False
+            text:"Note"
+            size_hint:0.35,0.12
+            pos_hint:{"center_x":0.5,"y":0.45}
+            on_release: app.root.current = "Note"
+        Button:
+            id: back
+            # source:'static/images/back.png'
+            # allow_stretch: True
+            # keep_ratio: False
+            text:"Back"
+            size_hint:0.35,0.12
+            pos_hint:{"center_x":0.5,"y":0.2}
+            on_release: app.root.current = "Welcome"
+
+
+
+<BuisnessCard>:
+    cardname:cardname
+    mobile:mobile
+    home:home
+    work:work
+    email:email
+    address:address
+    name:"BuisnessCard"
+    StackLayout:
+        orientation: 'lr-tb'
+        Label:
+            text:"Name"
+            size_hint:0.5,0.125
+        TextInput:
+            id:cardname
+            size_hint:0.5,0.125
+        Label:
+            text:"Mobile"
+            size_hint:0.5,0.125
+        TextInput:
+            id:mobile
+            size_hint:0.5,0.125
+        Label:
+            text:"Home"
+            size_hint:0.5,0.125
+        TextInput:
+            id:home
+            size_hint:0.5,0.125
+        Label:
+            text:"Work"
+            size_hint:0.5,0.125
+        TextInput:
+            id:work
+            size_hint:0.5,0.125
+        Label:
+            text:"Email"
+            size_hint:0.5,0.125
+        TextInput:
+            id:email
+            size_hint:0.5,0.125
+        Label:
+            text:'Address'
+            size_hint:0.5,0.125
+        TextInput:
+            id:address
+            size_hint:0.5,0.125
+        Label:
+            text:'Filename'
+            size_hint:0.5,0.125
+        TextInput:
+            id:filename
+            hint_text:"Leave empty if you wish to generate QR without saving"
+            size_hint:0.5,0.125
+        Button:
+            text:"Back"
+            size_hint:0.3333,0.125
+            on_release:app.root.current = "Main"
+        Button:
+            text:"Save"
+            size_hint:0.3333,0.125
+            on_release: root.qr_generator()
+        Button:
+            text:"Generate"
+            size_hint:0.3333,0.125
+            on_release: root.qr_generator()
+            on_release: app.root.current = "CardCode"
+
+<Note>:
+    name:"Note"
+    filename:filename
+    StackLayout:
+        orientation: 'lr-tb'
+        Label:
+            text:"Create QR Note"
+            size_hint:1,0.15
+            text_align:"center"
+        TextInput:
+            id:note_input
+            multiline:True
+            size_hint:1,0.7
+        Label:
+            text:"Filename: "
+            size_hint:0.5,0.05
+        TextInput:
+            id:filename
+            size_hint:0.5,0.05
+            hint_text:"Leave empty if you wish to generate QR without saving"
+        Button:
+            text:"Back"
+            size_hint:0.33333,0.1
+            on_release: app.root.current = "Main"
+        Button:
+            text:"Save"
+            size_hint:0.33333,0.1
+            on_release: root.qr_generator()
+        Button:
+            text:"Show"
+            size_hint:0.33333,0.1
+            on_release: root.qr_generator()
+            on_release: app.root.current = "NoteCode"
+
+<NoteCode>:
+    name:"NoteCode"
+    GridLayout:
+        cols:1
+        rows:2
+        Image:
+            id:image
+            allow_stretch:False
+            source:root.path()
+        Button:
+            size_hint_y:0.1
+            text:"Back"
+            on_release: app.root.current = "Note"
+<CardCode>:
+    name:"CardCode"
+    GridLayout:
+        cols:1
+        rows:2
+        Image:
+            id:image
+            allow_stretch:False
+            source:root.path()
+        Button:
+            size_hint_y:0.1
+            text:"Back"
+            on_release: app.root.current = "BuisnessCard"

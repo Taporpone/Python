@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+{% extends 'paste/master.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<strong>{{ boldmessage }}</strong><br />
+<img src="{% static "images/test.jpeg" %}" />
+{% endblock %}
